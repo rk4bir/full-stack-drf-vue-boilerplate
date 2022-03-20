@@ -31,6 +31,7 @@ docker-compose up --build
  - Secure authentication with `axios` [interceptor](./pwa/src/services/core/api.js)
  - Sign In
  - Sign Out
+ - Profile update
  - Automatic pwa update notification via service-worker. Refs - [register-service-worker](./pwa/src/registerServiceWorker.js), [update-component](./pwa/src/App.vue), [mixin](./pwa/src/mixins/update.js)
  - [Bootstrap theming](./pwa/src/plugins/bootstrap/app.scss)
  - Built-in [production server](./pwa/server.js)
