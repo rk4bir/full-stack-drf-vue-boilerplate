@@ -1,0 +1,21 @@
+[report]
+show_missing = True
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+omit =
+    */migrations/*
+    */settings/*
+    */asgi.py
+    */wsgi.py
+    */manage.py
+    */permissions.py
+    */admin.py
+    */apps.py
+
+ignore_errors = True
+
+
+[xml]
+output = .reports/coverage.xml

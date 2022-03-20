@@ -1,0 +1,38 @@
+# .github/workflows/build.yml
+name: Build
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      # Setup Python (faster than using Python container)
+      - name: Setting up python...
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8.x"
+
+      # operations
+      - name: Installing dependencies...
+        run: pip install -U pip && pip install -r requirements.txt
+
+      - name: Running database migrations
+        env:
+          DJANGO_ENV: test
+        run: python manage.py makemigrations && python manage.py migrate
+
+      - name: Running development server
+        env:
+          DJANGO_ENV: test
+        run: python manage.py runserver &

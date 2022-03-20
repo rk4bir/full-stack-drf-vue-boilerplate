@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  backend-api:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
+    ports:
+      - "8000:8000"
+
+volumes:
+  static_volume:
+  media_volume:

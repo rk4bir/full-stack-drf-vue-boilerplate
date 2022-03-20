@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  backend-api:
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
+    ports:
+      - "8000:8000"
+  pwa:
+    build: 
+      context: ./pwa
+      dockerfile: Dockerfile
+    environment:
+      - PORT=8080
+      - HOST=0.0.0.0
+    restart: always
+    command: npm run dev
+    ports:
+      - "8080:8080"
+    volumes: 
+      - ./:/app
+      - node_modules:/app/node_modules/
+volumes:
+  static_volume:
+  media_volume:
+  node_modules:
